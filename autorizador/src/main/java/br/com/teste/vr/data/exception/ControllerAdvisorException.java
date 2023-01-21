@@ -13,15 +13,21 @@ import java.util.Map;
 @ControllerAdvice
 public class ControllerAdvisorException extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ErrorException.class)
-    protected ResponseEntity<Object> handleApiKeyException(ErrorException ex) {
+    @ExceptionHandler(CardException.class)
+    protected ResponseEntity<Object> handleCard(CardException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("source", "INTERNO" );
-        body.put("error", ex.getModel().getMessage());
-        body.put("error_description", ex.getModel().getMessage());
-        return new ResponseEntity<>(body, ex.getModel().getStatus());
+        body.put("error", ex.getRequestDto());
+        body.put("error_description", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.valueOf(ex.getErrorCode()));
     }
 
+    @ExceptionHandler(TransactionException.class)
+    protected ResponseEntity<Object> handleTransaction(TransactionException ex) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("error_description", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.valueOf(ex.getErrorCode()));
+    }
 
 }

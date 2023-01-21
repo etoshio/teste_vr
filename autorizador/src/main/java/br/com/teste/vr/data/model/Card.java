@@ -22,13 +22,13 @@ public class Card {
     @Column( name = "id", unique = true, nullable = false )
     private Long id;
 
-    @Column(name = "cardNumber", nullable = false)
+    @Column(name = "numeroCartao", nullable = false)
     @NotBlank( message = "Cartão é obrigatório" )
-    private String cardNumber;
+    private String numeroCartao;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "senha")
+    private String senha;
 
-    @Column(name = "balance", nullable = false)
-    private BigDecimal balance = new BigDecimal(500);
+    @Column(name = "saldo", nullable = false)
+    private BigDecimal saldo = new BigDecimal(500);
 }

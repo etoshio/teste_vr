@@ -11,5 +11,5 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class TransactionResponseDto {
 
-    private BigDecimal balance;
+    private BigDecimal saldo;
 }

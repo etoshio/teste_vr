@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 public class TransactionRequestDto {
 
     @NotEmpty(message = "Número de cartão obrigatório")
-    private String cardNumber;
+    private String numeroCartao;
     @NotEmpty(message = "Senha obrigatório")
-    private String password;
+    private String senhaCartao;
     @NotEmpty(message = "Valor obrigatório")
-    private BigDecimal value;
+    private BigDecimal valor;
 }

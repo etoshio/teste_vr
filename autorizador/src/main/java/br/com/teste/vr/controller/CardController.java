@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping( "/card" )
+@RequestMapping( "/cartoes" )
 @Tag( name = "Cartões", description = "Cartões" )
 public class CardController {
 

@@ -24,13 +24,13 @@ public class Transaction {
     @Column( name = "id", unique = true, nullable = false )
     private Long id;
 
-    @Column(name = "cardNumber", nullable = false)
+    @Column(name = "numeroCartao", nullable = false)
     @NotBlank( message = "Cartão é obrigatório" )
-    private String cardNumber;
+    private String numeroCartao;
 
-    @Column(name = "value", nullable = false)
-    private BigDecimal value = new BigDecimal(500);
+    @Column(name = "valor", nullable = false)
+    private BigDecimal valor;
 
     @CreationTimestamp
-    private LocalDateTime createDateTime;
+    private LocalDateTime dataCriacao;
 }

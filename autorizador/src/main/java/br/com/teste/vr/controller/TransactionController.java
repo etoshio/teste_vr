@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping( "/transaction" )
+@RequestMapping( "/transacoes" )
 @Tag( name = "Transações", description = "Transações" )
 public class TransactionController {
 
@@ -23,7 +23,7 @@ public class TransactionController {
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<TransactionResponseDto> createTransaction(@Valid @RequestBody TransactionRequestDto dto) {
+    public ResponseEntity createTransaction(@Valid @RequestBody TransactionRequestDto dto) {
         return new ResponseEntity(service.createTransaction(dto), HttpStatus.CREATED );
     }
 }

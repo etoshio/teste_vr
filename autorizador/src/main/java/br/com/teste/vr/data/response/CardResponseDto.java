@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CardResponseDto {
 
-    private String card;
-    private BigDecimal balance;
+    private String numeroCartao;
+    private String senha;
+    private BigDecimal saldo;
 }

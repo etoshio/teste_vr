@@ -1,7 +1,6 @@
 package br.com.teste.vr.service;
 
-import br.com.teste.vr.data.exception.ErrorException;
-import br.com.teste.vr.data.exception.ErrorType;
+import br.com.teste.vr.data.exception.CardException;
 import br.com.teste.vr.data.model.Card;
 import br.com.teste.vr.data.request.CardRequestDto;
 import br.com.teste.vr.data.response.CardResponseDto;
@@ -22,20 +21,20 @@ public class CardService {
     public CardResponseDto create(final CardRequestDto dto) {
         Card cardEntity = mapper.map(dto, Card.class);
         if (getCard(cardEntity) != null) {
-            throw new ErrorException(ErrorType.DUPLICATED_CARD);
+            throw new CardException("CARD_DUPLICATED", dto, 422);
         }
 
         return mapper.map(repository.save(cardEntity), CardResponseDto.class);
     }
 
     private Card getCard(Card card) {
-        return repository.findByCardNumber(card.getCardNumber().trim()).orElse(null);
+        return repository.findByNumeroCartao(card.getNumeroCartao().trim()).orElse(null);
     }
 
     public CardResponseDto findByCardNumber(String cardNumber) {
-        Card card = getCard(Card.builder().cardNumber(cardNumber).build());
+        Card card = getCard(Card.builder().numeroCartao(cardNumber).build());
         if(ObjectUtils.isEmpty(card)) {
-            throw new ErrorException(ErrorType.NOT_FOUND);
+            throw new CardException("CARD_NOT_FOUND", null, 404);
         }
         return mapper.map(card, CardResponseDto.class);
     }

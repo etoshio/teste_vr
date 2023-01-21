@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class CardRequestDto {
     @NotEmpty(message = "Número de cartão obrigatório")
-    private String cardNumber;
+    private String numeroCartao;
     @NotEmpty(message = "Senha obrigatório")
-    private String password;
+    private String senha;
 }

@@ -1,7 +1,6 @@
 package br.com.teste.vr.service;
 
-import br.com.teste.vr.data.exception.ErrorException;
-import br.com.teste.vr.data.exception.ErrorType;
+import br.com.teste.vr.data.exception.TransactionException;
 import br.com.teste.vr.data.model.Card;
 import br.com.teste.vr.data.model.Transaction;
 import br.com.teste.vr.data.request.TransactionRequestDto;
@@ -18,19 +17,18 @@ public class TransactionService {
     private TransactionRepository repository;
     @Autowired
     private CardRepository cardRepository;
-
     private ModelMapper mapper = new ModelMapper();
     public TransactionResponseDto createTransaction(TransactionRequestDto dto) {
-        Card card = cardRepository.findByCardNumber(dto.getCardNumber())
-                .orElseThrow(() -> new ErrorException(ErrorType.NOT_FOUND));
+        Card card = cardRepository.findByNumeroCartao(dto.getNumeroCartao())
+                .orElseThrow(() -> new TransactionException("CARTAO_INEXISTENTE", 404));
         if (!checkPassword(card, dto)) {
-            throw new ErrorException(ErrorType.PASSWORD_INVALID);
+            throw new TransactionException("SENHA_INVALIDA", 422);
         }
         if (!checkValue(card, dto)) {
-            throw new ErrorException(ErrorType.INSUFFICIENT_BALANCE);
+            throw new TransactionException("SALDO_INSUFICIENTE", 422);
         }
 
-        card.setBalance(card.getBalance().subtract(dto.getValue()));
+        card.setSaldo(card.getSaldo().subtract(dto.getValor()));
         TransactionResponseDto transactionResponseDto = mapper.map(cardRepository.save(card),
                 TransactionResponseDto.class);
 
@@ -39,10 +37,10 @@ public class TransactionService {
     }
 
     private Boolean checkValue(Card card, TransactionRequestDto dto) {
-        return card.getBalance().compareTo(dto.getValue()) >= 0;
+        return card.getSaldo().compareTo(dto.getValor()) >= 0;
     }
 
     private Boolean checkPassword(Card card, TransactionRequestDto dto) {
-        return card.getPassword().equals(dto.getPassword());
+        return card.getSenha().equals(dto.getSenhaCartao());
     }
 }

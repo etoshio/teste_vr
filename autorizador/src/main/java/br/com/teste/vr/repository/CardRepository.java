@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CardRepository extends CrudRepository<Card, Long > {
-    Optional<Card> findByCardNumber(String cardNumber);
+    Optional<Card> findByNumeroCartao(String cardNumber);
 }
