@@ -1,4 +1,4 @@
-package br.com.teste.vr.repository.model;
+package br.com.teste.vr.data.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

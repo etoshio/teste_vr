@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 public class ErrorType {
     public static final ErrorType DUPLICATED_CARD = new ErrorType(HttpStatus.UNPROCESSABLE_ENTITY, "Cartão já cadastrado. Tente novamente com outro número.");
     public static final ErrorType NOT_FOUND = new ErrorType(HttpStatus.NOT_FOUND, "Cartão não encontrado.");
+    public static final ErrorType PASSWORD_INVALID = new ErrorType(HttpStatus.BAD_REQUEST, "Senha inválido.");
+    public static final ErrorType INSUFFICIENT_BALANCE = new ErrorType(HttpStatus.BAD_REQUEST, "Saldo insuficiente.");
 
 
     @NonNull
